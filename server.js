@@ -27,6 +27,33 @@ app.get("/bruxos/:id", (req, res) => {
   }
 });
 
+app.get("/bruxos/nome/:nome", (req, res) => {
+    let nome = req.params.nome.toLowerCase();
+
+    const bruxosEncontrados = bruxos.filter(b => b.nome.toLowerCase().includes(nome));
+
+    if(bruxosEncontrados.length > 0) {
+        res.status(200).json(bruxosEncontrados);
+    } else {
+        res.status(404).json({
+            mensagem: "Bruxo(s) não encontrado(s)!"
+        });
+    }
+})
+app.get("/bruxos/casa/:casa", (req, res) => {
+    let casa = req.params.casa.toLowerCase();
+
+    const casaEncontrada = bruxos.filter(b => b.casa.toLowerCase().includes(casa));
+
+    if(casaEncontrada.length > 0) {
+        res.status(200).json(casaEncontrada);
+    } else {
+        res.status(404).json({
+            mensagem: "Casa não encontrado(s)!"
+        });
+    }
+})
+
 app.listen(serverPort, () => {
   console.log(`O Servidor funcionando na porta http://localhost:${serverPort}`);
 });
