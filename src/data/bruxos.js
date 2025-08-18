@@ -103,7 +103,7 @@ export default [
         id: 11,
         nome: "Tom Riddle (Lord Voldemort)",
         casa: "Sonserina",
-        ano: 7 (na época escolar, depois se tornou o maior bruxo das trevas),
+        ano: 7,
         varinha: "Junípero e núcleo de fênix, 27cm",
         mascote: "Nenhum",
         patrono: "Desconhecido",
