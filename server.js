@@ -36,7 +36,7 @@ app.get("/bruxos/nome/:nome", (req, res) => {
         res.status(200).json(bruxosEncontrados);
     } else {
         res.status(404).json({
-            mensagem: "Bruxo(s) não encontrado(s)!"
+            mensagem: "Bruxo(s) não encontrado(s) com este nome!"
         });
     }
 })
@@ -49,9 +49,19 @@ app.get("/bruxos/casa/:casa", (req, res) => {
         res.status(200).json(casaEncontrada);
     } else {
         res.status(404).json({
-            mensagem: "Casa não encontrado(s)!"
+            mensagem: "Casa não encontrado(s) com este nome!"
         });
     }
+})
+
+app.get("/bruxos/vivos/:nao", (req, res) => {
+  const resultado = bruxos.filter((b) => !b.status);
+
+  if (resultado) {
+    res.status(200).json(resultado);
+  } else {
+    res.status(404).json({erro: "Nem um bruxo morto encontrado!"})
+  }
 })
 
 app.listen(serverPort, () => {
