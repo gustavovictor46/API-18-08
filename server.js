@@ -1,5 +1,7 @@
 import express from "express";
-import bruxos from "./src/data/bruxos.js";
+import dados from "./src/data/dados.js";
+
+const {bruxos, varinhas, animais, casas, pocoes} = dados;
 
 const app = express();
 const serverPort = 3000;
@@ -54,6 +56,80 @@ app.get("/bruxos/casa/:casa", (req, res) => {
     }
 })
 
+app.get("/varinhas", (req, res) => {
+  res.json(varinhas);
+});
+
+app.get("/animais", (req, res) => {
+  res.json(animais);
+});
+
+app.get("/pocoes", (req, res) => {
+  res.json(pocoes);
+});
+
+app.get("/casas", (req, res) => {
+  res.json(casas);
+});
+
+app.get("/varinhas/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(typeof id);
+  const varinha = varinhas.find((b) => b.id === id);
+  console.log(varinhas);
+
+  if (varinha) {
+    res.status(200).json(varinha);
+  } else {
+    res.status(404).json({
+      mensagem: "Varinha não encontrado!",
+    });
+  }
+});
+app.get("/animais/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(typeof id);
+  const animal = animais.find((b) => b.id === id);
+  console.log(animais);
+
+  if (animal) {
+    res.status(200).json(animal);
+  } else {
+    res.status(404).json({
+      mensagem: "Animal não encontrado!",
+    });
+  }
+});
+app.get("/pocoes/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(typeof id);
+  const pocao = pocoes.find((b) => b.id === id);
+  console.log(pocoes);
+
+  if (pocao) {
+    res.status(200).json(pocao);
+  } else {
+    res.status(404).json({
+      mensagem: "Poção não encontrado!",
+    });
+  }
+});
+app.get("/casas/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  console.log(typeof id);
+  const casa = casas.find((b) => b.id === id);
+  console.log(casas);
+
+  if (casa) {
+    res.status(200).json(casa);
+  } else {
+    res.status(404).json({
+      mensagem: "Casa não encontrada!",
+    });
+  }
+});
+
+
 app.get("/bruxos/vivos/:nao", (req, res) => {
   const resultado = bruxos.filter((b) => !b.status);
 
@@ -62,7 +138,7 @@ app.get("/bruxos/vivos/:nao", (req, res) => {
   } else {
     res.status(404).json({erro: "Nem um bruxo morto encontrado!"})
   }
-})
+});
 
 app.listen(serverPort, () => {
   console.log(`O Servidor funcionando na porta http://localhost:${serverPort}`);
